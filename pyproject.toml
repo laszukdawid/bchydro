@@ -1,0 +1,16 @@
+[project]
+name = "bchydro"
+requires-python = ">=3.12"
+version = "0.1.0"
+description = "BC Hydro scrapers and others"
+readme = "README.md"
+license = { text = "MIT" }
+keywords = ["bchydro"]
+
+dependencies = [
+    "beautifulsoup4",
+    "playwright",
+]
+
+[project.optional-dependencies]
+dev = ["ruff"]

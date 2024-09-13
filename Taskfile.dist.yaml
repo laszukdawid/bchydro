@@ -1,0 +1,39 @@
+version: 3
+
+dotenv:
+  - .env
+
+tasks:
+  # Development tasks
+  setup:
+    desc: Install the dependencies
+    cmds:
+      - uv venv
+      - uv sync
+      - .venv/bin/playwright install
+    
+  lock-env:
+    desc: Lock the environment
+    cmds:
+      - uv pip compile pyproject.toml -o requirements.txt
+  
+  code-format:
+    desc: Automatic code formatter
+    preconditions:
+      - test -f .venv/bin/ruff
+    cmd: .venv/bin/ruff format
+  
+  lint:
+    desc: Lint the code
+    preconditions:
+      - test -f .venv/bin/ruff
+    cmd: .venv/bin/ruff check
+
+  # Execution tasks
+  run:
+    desc: Run the Simple API test
+    preconditions:
+      - test  -f .venv/bin/python
+    cmds:
+      - uv run execute.py
+  
